@@ -21,4 +21,23 @@ The workshop is 2 hours 30 minutes long and you will learn to:
 
 # Getting started
 
-Fork this project on github by clicking this link [https://github.com/lnug/CityJS-Workshop/fork](https://github.com/lnug/CityJS-Workshop/fork)
+Fork this project on github and deploy by logging in through github at https://app.netlify.com/
+
+The netlify.toml file describes how the site should be deployed
+
+```toml
+[Settings]
+ID = "Your_Site_ID"
+[build]
+  base = ""
+  publish = "dist"
+  functions = "functions/"
+  command = "npm run build"
+```
+
+The base directory is the starting point where netlify looks for a file that shows how your project is configured. i.e. a package.json. It will also install any dependencies for you.
+
+All files in the publish directory get deployed to netlifys cdn
+
+All js files in the funcion directory get deployed as an aws lamda accessable on <your site>/.netlify/<name_of_folder>/<name_of_file>
+ 
