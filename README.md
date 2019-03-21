@@ -21,4 +21,4 @@ The workshop is 2 hours 30 minutes long and you will learn to:
 
 # Getting started
 
-Fork this project on github by clicking this link[https://github.com/lnug/CityJS-Workshop/fork](https://github.com/lnug/CityJS-Workshop/fork)
+Fork this project on github by clicking this link [https://github.com/lnug/CityJS-Workshop/fork](https://github.com/lnug/CityJS-Workshop/fork)
