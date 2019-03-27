@@ -1,6 +1,6 @@
 exports.handler = function(event, context, callback) {
   callback(null, {
     statusCode: 200,
-    body: "Netlify is fun"
+    body: "Netlify is super easy"
     });
 }
