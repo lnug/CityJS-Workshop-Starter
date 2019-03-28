@@ -2,15 +2,17 @@
     <div id="app">
         <div>
             <CurrentTurn :turn="turn" />
-            <Grid :turn="turn" @turnSwitch="handleNextTurn" />
+            <Grid :turn="turn" @turnSwitch="handleNextTurn" :locked="locked" @win="handleWin" ref="grid" />
             <SplitButton/>
             <WinBanner />
+            <Button @clicked="resetGame">Reset</Button>
         </div>
     </div>
 </template>
 
 <script>
 import Grid from "./components/Grid.vue";
+import Button from "./components/Button.vue"
 import SplitButton from "./components/SplitButton.vue";
 import CurrentTurn from "./components/CurrentTurn.vue"
 import WinBanner from "./components/WinBanner.vue"
@@ -21,17 +23,26 @@ export default {
         Grid,
         SplitButton,
         CurrentTurn,
-        WinBanner
+        WinBanner,
+        Button,
     },
     data() {
         return {
             turn: "times",
             win: null,
+            locked: false,
         };
     },
     methods: {
-      handleNextTurn: function() {
+      handleNextTurn() {
         this.turn = this.turn === "times" ? "circle" : "times";
+      },
+      handleWin() {
+          this.locked = true
+      },
+      resetGame: function() {
+          this.locked = false;
+          this.$refs.grid.handleReset() // I don't like this....
       }
     }
 };
