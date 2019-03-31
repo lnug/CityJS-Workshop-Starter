@@ -17,6 +17,18 @@ import SplitButton from "./components/SplitButton.vue";
 import CurrentTurn from "./components/CurrentTurn.vue"
 import WinBanner from "./components/WinBanner.vue"
 
+// Just testing dev proxy in vue.config.js works
+// import { moves } from './api';
+
+// (async() => await moves.addMove({
+// 	"game": "1234 - test",
+// 	"board": [],
+// 	"move": {
+// 		"cell":3,
+// 		"value":"x"
+// 	}
+// }))()
+
 export default {
     name: "app",
     components: {
