@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.squareWrap" @click="handleClick">
-        <FontAwesomeIcon :icon="timesIcon" :class="$style.faTimes" v-if="turn === 'times'" />
-        <FontAwesomeIcon :icon="circleIcon" :class="$style.faCircle" v-if="turn === 'circle'" />'s turn
+        <FontAwesomeIcon :icon="timesIcon" :class="$style.faTimes" v-if="turn === 'x'" />
+        <FontAwesomeIcon :icon="circleIcon" :class="$style.faCircle" v-if="turn === 'o'" />'s turn
     </div>
 </template>
 
