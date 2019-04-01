@@ -12,24 +12,11 @@
 
 <script>
 import Grid from "./components/Grid.vue";
-import Button from "./components/Button.vue"
+import Button from "./components/Button.vue";
 import SplitButton from "./components/SplitButton.vue";
-import CurrentTurn from "./components/CurrentTurn.vue"
-import WinBanner from "./components/WinBanner.vue"
-
-import uuid from "uuid/v1"
-
-// Just testing dev proxy in vue.config.js works
-// import { moves } from './api';
-
-// (async() => await moves.addMove({
-// 	"game": "1234 - test",
-// 	"board": [],
-// 	"move": {
-// 		"cell":3,
-// 		"value":"x"
-// 	}
-// }))()
+import CurrentTurn from "./components/CurrentTurn.vue";
+import WinBanner from "./components/WinBanner.vue";
+import uuid from "uuid/v1";
 
 export default {
     name: "app",
