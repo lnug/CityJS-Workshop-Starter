@@ -104,7 +104,7 @@ export default {
                 return;
             }
             if (!this.board[position]) {
-                moves.addMove({ game: this.game, board: Object.values(this.board), move: { cell: position, value: this.turn}})
+                moves.addMove({ game: this.game, board: Object.values(this.board), move: { cell: position, value: this.turn}});
                 this.board[position] = this.turn;
                 this.win();
                 this.$emit("turnSwitch");
