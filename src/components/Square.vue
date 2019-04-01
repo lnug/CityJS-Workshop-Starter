@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.squareWrap" @click="handleClick">
-        <FontAwesomeIcon :icon="timesIcon" :class="$style.faTimes" v-if="value === 'times'" />
-        <FontAwesomeIcon :icon="circleIcon" :class="$style.faCircle" v-if="value === 'circle'" />
+        <FontAwesomeIcon :icon="timesIcon" :class="$style.faTimes" v-if="value === 'x'" />
+        <FontAwesomeIcon :icon="circleIcon" :class="$style.faCircle" v-if="value === 'o'" />
     </div>
 </template>
 

@@ -64,7 +64,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faTimes, faCircle } from "@fortawesome/free-solid-svg-icons";
 import Square from "./Square.vue";
-
+import { moves } from '../api';
 
 export default {
     name: "Grid",
@@ -75,6 +75,7 @@ export default {
     props: {
         turn: String,
         locked: Boolean,
+        game: String,
     },
     data() {
         return {
@@ -103,6 +104,7 @@ export default {
                 return;
             }
             if (!this.board[position]) {
+                moves.addMove({ game: this.game, board: Object.values(this.board), move: { cell: position, value: this.turn}});
                 this.board[position] = this.turn;
                 this.win();
                 this.$emit("turnSwitch");

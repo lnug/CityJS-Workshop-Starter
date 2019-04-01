@@ -2,7 +2,7 @@
     <div id="app">
         <div>
             <CurrentTurn :turn="turn" />
-            <Grid :turn="turn" @turnSwitch="handleNextTurn" :locked="locked" @win="handleWin" ref="grid" />
+            <Grid :turn="turn" @turnSwitch="handleNextTurn" :game="game" :locked="locked" @win="handleWin" ref="grid" />
             <SplitButton/>
             <WinBanner />
             <Button @clicked="resetGame">Reset</Button>
@@ -12,10 +12,11 @@
 
 <script>
 import Grid from "./components/Grid.vue";
-import Button from "./components/Button.vue"
+import Button from "./components/Button.vue";
 import SplitButton from "./components/SplitButton.vue";
-import CurrentTurn from "./components/CurrentTurn.vue"
-import WinBanner from "./components/WinBanner.vue"
+import CurrentTurn from "./components/CurrentTurn.vue";
+import WinBanner from "./components/WinBanner.vue";
+import uuid from "uuid/v1";
 
 export default {
     name: "app",
@@ -28,19 +29,24 @@ export default {
     },
     data() {
         return {
-            turn: "times",
+            turn: "x",
             win: null,
             locked: false,
+            game: null,
         };
+    },
+    created: function () {
+        this.resetGame()
     },
     methods: {
       handleNextTurn() {
-        this.turn = this.turn === "times" ? "circle" : "times";
+        this.turn = this.turn === "x" ? "o" : "x";
       },
       handleWin() {
           this.locked = true
       },
       resetGame: function() {
+          this.game = uuid();
           this.locked = false;
           this.$refs.grid.handleReset() // I don't like this....
       }
