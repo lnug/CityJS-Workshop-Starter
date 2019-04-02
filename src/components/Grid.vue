@@ -66,6 +66,17 @@ import { faTimes, faCircle } from "@fortawesome/free-solid-svg-icons";
 import Square from "./Square.vue";
 import { moves } from '../api';
 
+const winContitions = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6],
+]
+
 export default {
     name: "Grid",
     components: {
@@ -80,22 +91,12 @@ export default {
     data() {
         return {
             won: null,
-            board: {
-                0: null,
-                1: null,
-                2: null,
-                3: null,
-                4: null,
-                5: null,
-                6: null,
-                7: null,
-                8: null
-            }
+            board: Array(9).fill('')
         };
     },
     computed: {
         winIcon() {
-            return this.won === 'times' ? faTimes : faCircle
+            return this.won === 'x' ? faTimes : faCircle
         }
     },
     methods: {
@@ -104,45 +105,27 @@ export default {
                 return;
             }
             if (!this.board[position]) {
-                moves.addMove({ game: this.game, board: Object.values(this.board), move: { cell: position, value: this.turn}});
-                this.board[position] = this.turn;
+                moves.addMove({ game: this.game, board: this.board, move: { cell: position, value: this.turn}});
+                this.board = this.board.map((el, index) => index === position ? this.turn : el);
                 this.win();
                 this.$emit("turnSwitch");
             }
         },
         handleReset() {
             const theBoard = this.board;
-            Object.keys(theBoard).forEach(function(key) {
-                return (theBoard[key] = null);
+            theBoard.forEach(function(el, index) {
+                return (theBoard[index] = '');
             });
             this.won = null
         },
         win: function() {
-            if (
-                (this.board[0] &&
-                    this.board[0] === this.board[1] &&
-                    this.board[1] === this.board[2]) ||
-                (this.board[3] &&
-                    this.board[3] === this.board[4] &&
-                    this.board[4] === this.board[5]) ||
-                (this.board[6] &&
-                    this.board[6] === this.board[7] &&
-                    this.board[7] === this.board[8]) ||
-                (this.board[0] &&
-                    this.board[0] === this.board[3] &&
-                    this.board[3] === this.board[6]) ||
-                (this.board[1] &&
-                    this.board[1] === this.board[4] &&
-                    this.board[4] === this.board[7]) ||
-                (this.board[2] &&
-                    this.board[2] === this.board[5] &&
-                    this.board[5] === this.board[8]) ||
-                (this.board[0] &&
-                    this.board[0] === this.board[4] &&
-                    this.board[4] === this.board[8]) ||
-                (this.board[3] &&
-                    this.board[3] === this.board[4] &&
-                    this.board[4] === this.board[6])
+            if (winContitions.find(
+                el => 
+                this.board[el[0]] === this.board[el[1]] && 
+                this.board[el[1]] === this.board[el[2]] && 
+                this.board[el[0]] !== '' && 
+                this.board[el[1]] !== '' 
+                && this.board[el[2]] !== '')
             ) {
                 this.$emit("win", this.turn);
                 this.won = this.turn
