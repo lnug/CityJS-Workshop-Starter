@@ -106,18 +106,17 @@ export default {
             }
             if (!this.board[position]) {
         
-                moves.addMove({ game: this.game, board: this.board, move: { cell: position, value: this.turn}});
+                // moves.addMove({ game: this.game, board: this.board, move: { cell: position, value: this.turn}});
                 this.board = this.board.map((el, index) => index === position ? this.turn : el);
+
                 moves.getAIMove(this.board)
                 this.win();
                 this.$emit("turnSwitch");
             }
         },
         handleReset() {
-            const theBoard = this.board;
-            theBoard.forEach(function(el, index) {
-                return (theBoard[index] = 0);
-            });
+
+            this.board = Array(9).fill(0)
             this.won = null
         },
         win: function() {

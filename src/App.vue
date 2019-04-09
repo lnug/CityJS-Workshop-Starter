@@ -3,7 +3,7 @@
         <div>
             <CurrentTurn :turn="turn" />
             <Grid :turn="turn" @turnSwitch="handleNextTurn" :game="game" :locked="locked" @win="handleWin" ref="grid" />
-            <SplitButton/>
+            <SplitButton :mode="mode" @gameMode="modeSwitch" />
             <WinBanner />
             <Button @clicked="resetGame">Reset</Button>
         </div>
@@ -33,6 +33,7 @@ export default {
             win: null,
             locked: false,
             game: null,
+            mode: '2Player'
         };
     },
     created: function () {
@@ -45,7 +46,10 @@ export default {
       handleWin() {
           this.locked = true
       },
-      resetGame: function() {
+      modeSwitch() {
+          this.mode = this.mode === '2Player' ? 'ai' : '2Player'
+      },
+      resetGame() {
           this.game = uuid();
           this.locked = false;
           this.$refs.grid.handleReset() // I don't like this....
