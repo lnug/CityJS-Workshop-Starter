@@ -84,19 +84,19 @@ export default {
         FontAwesomeIcon,
     },
     props: {
-        turn: String,
+        turn: Number,
         locked: Boolean,
         game: String,
     },
     data() {
         return {
             won: null,
-            board: Array(9).fill('')
+            board: Array(9).fill(0)
         };
     },
     computed: {
         winIcon() {
-            return this.won === 'x' ? faTimes : faCircle
+            return this.won === -1 ? faTimes : faCircle
         }
     },
     methods: {
@@ -105,8 +105,10 @@ export default {
                 return;
             }
             if (!this.board[position]) {
+        
                 moves.addMove({ game: this.game, board: this.board, move: { cell: position, value: this.turn}});
                 this.board = this.board.map((el, index) => index === position ? this.turn : el);
+                moves.getAIMove(this.board)
                 this.win();
                 this.$emit("turnSwitch");
             }
@@ -114,7 +116,7 @@ export default {
         handleReset() {
             const theBoard = this.board;
             theBoard.forEach(function(el, index) {
-                return (theBoard[index] = '');
+                return (theBoard[index] = 0);
             });
             this.won = null
         },
@@ -123,9 +125,9 @@ export default {
                 el => 
                 this.board[el[0]] === this.board[el[1]] && 
                 this.board[el[1]] === this.board[el[2]] && 
-                this.board[el[0]] !== '' && 
-                this.board[el[1]] !== '' 
-                && this.board[el[2]] !== '')
+                this.board[el[0]] !== 0 && 
+                this.board[el[1]] !== 0 
+                && this.board[el[2]] !== 0)
             ) {
                 this.$emit("win", this.turn);
                 this.won = this.turn

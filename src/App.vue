@@ -29,7 +29,7 @@ export default {
     },
     data() {
         return {
-            turn: "x",
+            turn: -1,
             win: null,
             locked: false,
             game: null,
@@ -40,7 +40,7 @@ export default {
     },
     methods: {
       handleNextTurn() {
-        this.turn = this.turn === "x" ? "o" : "x";
+        this.turn = this.turn === -1 ? 1 : -1;
       },
       handleWin() {
           this.locked = true

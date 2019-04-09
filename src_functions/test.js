@@ -13,16 +13,18 @@ const huPlayer = 1;
 
 const aiPlayer = -1;
 
+let moves = []
+
+
 
 function checkWin(board, player) {
-  const winCheck = player === huPlayer ? 1 : -1
+	const winCheck = player === huPlayer ? 1 : -1
 	const plays = board.map((space, index) => {
     return space === winCheck ? index :null
   }).filter(space => {
     return space !== null
   })
 
-  let gameWon = null;
   
   const win = winContitions.map((winCon) => {
 
@@ -47,74 +49,85 @@ const availableSpaces = (board) => {
   })
 }
 
-const minMax = (board, player) => {
+function miniMax(newBoard, player) {
 
-  const spaces = availableSpaces(board)
-  console.log(spaces)
-  if (checkWin(board, huPlayer))
-	{
-    console.log('terminal 1')
-		return { score: -10 };
-	} 
-	else if (checkWin(board, aiPlayer))
-	{
-    console.log('terminal 2')
-		return { score: 10 };
-	} 
-	else if (spaces.length === 0)
-	{
-    console.log('terminal 3')
-		return { score: 0 };
-  }
-
-
-  console.log('not terminal')
-  console.log(board)
+  let emptySpaces = availableSpaces(newBoard)
   
-  // If not terminal then work out possible moves
+  if (checkWin(newBoard, huPlayer))
+	{
+		return {score: -10};
+	} 
+	else if (checkWin(newBoard, aiPlayer))
+	{
+		return {score: 10};
+	} 
+	else if (emptySpaces.length === 0)
+	{
+		return {score: 0};
+	}
 
-  let moves = []
-  for( let i = 0; i < spaces.length; i++) {
-    if(i !== 0) {
-      console.log('secondtime')
+  for(let x = 0; x < emptySpaces.length; x++) {
+
+    let move = {
+      index: emptySpaces[x]
     }
-    console.log('again', i, spaces[i])
+    newBoard[emptySpaces[x]] = player
 
-    let move = {}
-    move.index = spaces[i]
-    board[spaces[i]] = player
-
-    console.log('itme', player)
     if (player == aiPlayer) {
-      var result = minMax(board, huPlayer);
-      console.log('herel', result)
-			move.scorel = result.score;
-		} 
-		else if (player === huPlayer) {
-      console.log('got here', player)
-      var result = minMax(board, aiPlayer);
-      console.log('herep', result)
-			move.scorep = result.score;
+      var result = miniMax(newBoard, huPlayer)
+      move.score = result.score
+    } else {
+      var result = miniMax(newBoard, huPlayer)
+      move.score = result.score
     }
-    
-    board[spaces[i]] = move.index;
-		moves.push(move);
 
+    newBoard[emptySpaces[x]] = 0
+    moves.push(move)
   }
 
-  console.log('deez', moves)
+  let bestMove;
+	if(player === aiPlayer) 
+	{
+		var bestScore = -10000;
+		for(var i = 0; i < moves.length; i++) 
+		{
+			if (moves[i].score > bestScore) 
+			{
+				bestScore = moves[i].score;
+				bestMove = i;
+			}
+		}
+	} 
+	else 
+	{
+		var bestScore = 10000;
+		for(var i = 0; i < moves.length; i++) 
+		{
+			if (moves[i].score < bestScore)
+			{
+				bestScore = moves[i].score;
+				bestMove = i;
+			}
+		}
+  }
+  
+  return moves[bestMove];
 }
 
 
 
 exports.handler = function(event, context, callback) {
-  const board = [1,-1,0,-1,-1,0,1,1,0]
 
-  console.log(minMax(board, aiPlayer))
+  const board = JSON.parse(event.body)
+  moves=[]
+
+  console.log(board)
+  console.log(availableSpaces(board))
+  // const board = JSON.parse(event.queryStringParameters.board)
 
 
   callback(null, {
       statusCode: 200,
-      body: JSON.stringify('minMax(board, aiPlayer)')
+      body: JSON.stringify(miniMax(board, aiPlayer))
   })
 }

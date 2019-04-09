@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.squareWrap" @click="handleClick">
-        <FontAwesomeIcon :icon="timesIcon" :class="$style.faTimes" v-if="value === 'x'" />
-        <FontAwesomeIcon :icon="circleIcon" :class="$style.faCircle" v-if="value === 'o'" />
+        <FontAwesomeIcon :icon="timesIcon" :class="$style.faTimes" v-if="value === -1" />
+        <FontAwesomeIcon :icon="circleIcon" :class="$style.faCircle" v-if="value === 1" />
     </div>
 </template>
 
@@ -12,7 +12,7 @@ import { faTimes, faCircle } from "@fortawesome/free-solid-svg-icons";
 export default {
     name: "Square",
     props: {
-        value: String,
+        value: Number,
         position: Number,
     },
     components: {
