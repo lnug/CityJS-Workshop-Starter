@@ -25,6 +25,8 @@ Our goal is to help you get a basic understanding of Serverless, otherwise known
 
 The example will push serverless to its limits exposing some of the challenges, like cold starts.
 
+The application you will be working on is a Tic-Tac-Toe game implemented using Vue.js! Over the next few hours you will work on the critical feature. Player vs AI!
+
 ## Serverless Thesaurus
 
 WIP
