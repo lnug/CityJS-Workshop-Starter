@@ -32,6 +32,7 @@ WIP
 ## The Challenges
 
 [ ] Add the AI mode to the UI
+
 [ ] stuff
 
 ## Lots of stuff
