@@ -2,7 +2,16 @@
     <div :class="$style.parapperTheWrapper">
         <div :class="$style.overlayWrap" v-if="won">
             <div :class="$style.emoji">🎉</div>
-            <div :class="$style.winText"><FontAwesomeIcon :icon="winIcon" :class="$style.faTimes" /> wins</div>
+            <div :class="$style.winText">
+                <FontAwesomeIcon
+                    :icon="winIcon"
+                    :class="{
+                        [$style.faTimes]: true,
+                        [$style.circleColor]: won === 1
+                    }"
+                />
+                 wins
+            </div>
         </div>
         <div :class="$style.gridWrap">
             <div :class="$style.row">
@@ -84,19 +93,20 @@ export default {
         FontAwesomeIcon,
     },
     props: {
-        turn: String,
+        turn: Number,
         locked: Boolean,
         game: String,
+        mode: String,
     },
     data() {
         return {
             won: null,
-            board: Array(9).fill('')
+            board: Array(9).fill(0)
         };
     },
     computed: {
         winIcon() {
-            return this.won === 'x' ? faTimes : faCircle
+            return this.won === -1 ? faTimes : faCircle
         }
     },
     methods: {
@@ -105,17 +115,36 @@ export default {
                 return;
             }
             if (!this.board[position]) {
-                moves.addMove({ game: this.game, board: this.board, move: { cell: position, value: this.turn}});
+        
+                // moves.addMove({ game: this.game, board: this.board, move: { cell: position, value: this.turn}});
                 this.board = this.board.map((el, index) => index === position ? this.turn : el);
-                this.win();
+
+                if (this.mode === 'ai') {
+                    this.$emit("toggleLock");
+                    if(this.win()) {
+                        return
+                    }
+                    this.$emit("turnSwitch");
+                    moves.getAIMove(this.board)
+                        .then(response => {
+                            const position = response.data.index
+                            this.board = this.board.map((el, index) => index === position ? this.turn : el)
+                            if(this.win()) {
+                                return
+                            }
+                            this.$emit("turnSwitch");
+                            this.$emit("toggleLock");
+                        })
+                    return
+                }
+                if(this.win()) {
+                    return
+                }
                 this.$emit("turnSwitch");
             }
         },
         handleReset() {
-            const theBoard = this.board;
-            theBoard.forEach(function(el, index) {
-                return (theBoard[index] = '');
-            });
+            this.board = Array(9).fill(0)
             this.won = null
         },
         win: function() {
@@ -123,15 +152,15 @@ export default {
                 el => 
                 this.board[el[0]] === this.board[el[1]] && 
                 this.board[el[1]] === this.board[el[2]] && 
-                this.board[el[0]] !== '' && 
-                this.board[el[1]] !== '' 
-                && this.board[el[2]] !== '')
+                this.board[el[0]] !== 0 && 
+                this.board[el[1]] !== 0 
+                && this.board[el[2]] !== 0)
             ) {
                 this.$emit("win", this.turn);
                 this.won = this.turn
-                return "true";
+                return true;
             }
-            return "false";
+            return false;
         }
     }
 };
@@ -189,5 +218,9 @@ export default {
     font-size: 60px;
     color: #DF6C69;
     padding-right: 30px;
+}
+
+.circleColor {
+    color: #DF6C69;
 }
 </style>

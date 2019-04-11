@@ -8,6 +8,11 @@ export async function addMove({
   return post('/.netlify/functions/move', { game, board, move });
 }
 
+export async function getAIMove(board) {
+  return post('/.netlify/functions/test', board);
+}
+
 export default { 
   addMove,
+  getAIMove,
 }

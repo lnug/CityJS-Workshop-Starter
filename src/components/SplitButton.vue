@@ -1,9 +1,17 @@
 <template>
-    <div :class="$style.wrap">
-        <div :class="$style.left">
+    <div :class="$style.wrap" @click="handleClick">
+        <div
+            :class="{
+                [$style.left]: true,
+                [$style.inactive]: mode === '2Player'
+            }">
             <FontAwesomeIcon :icon="playerIcon" :class="$style.faTimes" /> 2 player
         </div>
-        <div :class="$style.right">
+        <div
+            :class="{
+                [$style.right]: true,
+                [$style.inactive]: mode === 'ai'
+            }">
             <FontAwesomeIcon :icon="computerIcon" :class="$style.faTimes" /> vs AI
         </div>
     </div>
@@ -18,6 +26,7 @@ export default {
     props: {
         value: String,
         position: Number,
+        mode: String
     },
     components: {
         FontAwesomeIcon,
@@ -44,6 +53,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+    cursor: pointer;
 }
 
 .left {
@@ -66,6 +76,9 @@ export default {
     border-radius: 0px 3px 3px 0px;
     min-width: 100px;
     border-left: solid 1px #2a2a2a;
+}
+
+.inactive {
     opacity: 0.6;
 }
 
