@@ -9,7 +9,6 @@ export async function addMove({
 }
 
 export async function getAIMove(board) {
-  console.log('helloh', board)
   return post('/.netlify/functions/test', board);
 }
 

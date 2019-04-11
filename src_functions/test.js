@@ -121,10 +121,6 @@ exports.handler = function(event, context, callback) {
   const board = JSON.parse(event.body)
   moves=[]
 
-  console.log(board)
-  console.log(availableSpaces(board))
-  // const board = JSON.parse(event.queryStringParameters.board)
-
 
   callback(null, {
       statusCode: 200,
