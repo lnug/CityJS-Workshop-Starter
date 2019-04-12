@@ -23,7 +23,12 @@ If you need any help with the prerequisites send either of us a message and we w
 
 Our goal is to help you get a basic understanding of Serverless, otherwise known as Functions As A Service. We hope to do this by working through an examples together for use cases that don't really make sense but Hew it made work anyway (what a hero). 
 
-The example will push serverless to its limits exposing some of the challenges, like cold starts.
+The application is made in Vue.JS it's an aproachable and blazing fast framework for building applications in JavaScript. An little bit of javascript is all you will need to get through the workshop, but if you want to learn more have a look through the [documentation](https://vuejs.org/v2/guide/). Its fantastic!
+
+We are deploying the application to [Netlify](https://www.netlify.com/) it's a great platform for hosting and deploying websites and it links together very nicely with source control. Best of all it is free for small projects like this. We totaly did not get paid to say this but @netlify if you are listening? ;)
+
+We also use netlify functions, these are a quick easy way to deploy a serverless function to AWS. 
+
 
 ## Serverless Thesaurus
 
@@ -35,7 +40,8 @@ WIP
 
 [ ] stuff
 
-## Lots of stuff
+## Getting started
+
 
 
 
