@@ -36,9 +36,13 @@ WIP
 
 ## The Challenges
 
-[ ] Add the AI mode to the UI
+[ ] Building a serverless function that responds with the best next move. (We have some helpful code snippets to help with this one, if you have any suggestions to improve them let us know)
 
-[ ] stuff
+[ ] Write an api test that checks the function works as intended.
+
+[ ] Wire up the function to the front end and enable AI mode!
+
+[ ] Create a test that checks switching between AI and PVP works.
 
 ## Getting started
 
