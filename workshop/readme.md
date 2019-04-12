@@ -30,6 +30,8 @@ We are deploying the application to [Netlify](https://www.netlify.com/) it's a g
 We also use netlify functions, these are a quick easy way to deploy a serverless function to AWS. 
 
 
+The application you will be working on is a Tic-Tac-Toe game implemented using Vue.js! Over the next few hours you will work on the critical feature. Player vs AI!
+
 ## Serverless Thesaurus
 
 WIP
