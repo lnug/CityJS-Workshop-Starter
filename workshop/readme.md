@@ -21,7 +21,7 @@ If you need any help with the prerequisites send either of us a message and we w
 
 ## Introduction
 
-Our goal is to help you get a basic understanding of Serverless, otherwise known as Functions As A Service. We hope to do this by working through an examples together for use cases that don't really make sense but Hew it made work anyway (what a hero). 
+Our goal is to help you get a basic understanding of Serverless, otherwise known as Functions As A Service. We hope to do this by working through an examples together for a use case that doesnt really make sense but Hew it made work anyway (what a hero). 
 
 The application is made in Vue.JS it's an aproachable and blazing fast framework for building applications in JavaScript. An little bit of javascript is all you will need to get through the workshop, but if you want to learn more have a look through the [documentation](https://vuejs.org/v2/guide/). Its fantastic!
 
@@ -29,8 +29,6 @@ We are deploying the application to [Netlify](https://www.netlify.com/) it's a g
 
 We also use netlify functions, these are a quick easy way to deploy a serverless function to AWS. 
 
-
-The application you will be working on is a Tic-Tac-Toe game implemented using Vue.js! Over the next few hours you will work on the critical feature. Player vs AI!
 
 ## Serverless Thesaurus
 
