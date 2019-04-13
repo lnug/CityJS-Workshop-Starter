@@ -30,10 +30,6 @@ We will be deploying the application to [Netlify](https://www.netlify.com/) it's
 We will also use netlify functions, these are a quick easy way to deploy a serverless function to AWS. 
 
 
-## Serverless Thesaurus
-
-WIP
-
 ## The Challenges
 
 [ ] Building a serverless function that responds with the best next move. (We have some helpful code snippets to help with this one, if you have any suggestions to improve them let us know)
@@ -45,6 +41,13 @@ WIP
 [ ] Create a test that checks switching between AI and PVP works.
 
 ## Getting started
+
+The following steps will get you up and running.
+
+1. Fork your own copy of the lnug/CityJS-Workshop to your account.
+2. Go to [Netlify](https://www.netlify.com/) adn sign up.
+3. Click New Site from Git.
+4. Pick the CityJS-Workshop repository and Click Deploy.
 
 
 
