@@ -45,10 +45,10 @@ We will also use netlify functions, these are a quick easy way to deploy a serve
 The following steps will get you up and running.
 
 1. Fork your own copy of the lnug/CityJS-Workshop to your account.
-2. Go to [Netlify](https://www.netlify.com/) adn sign up.
+2. Go to [Netlify](https://www.netlify.com/) and sign up.
 3. Click New Site from Git.
 4. Pick the CityJS-Workshop repository and Click Deploy.
 
-
+The website should now be deployed to netlify at your own subdomain, and if you make any changes to the code and push it to githut the website will update in seconds to reflect those changes!
 
 
