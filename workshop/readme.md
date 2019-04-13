@@ -32,13 +32,13 @@ We will also use netlify functions, these are a quick easy way to deploy a serve
 
 ## The Challenges
 
-[ ] Building a serverless function that responds with the best next move. (We have some helpful code snippets to help with this one, if you have any suggestions to improve them let us know)
+* Building a serverless function that responds with the best next move. (We have some helpful code snippets to help with this one, if you have any suggestions to improve them let us know)
 
-[ ] Write an api test that checks the function works as intended.
+* Write an api test that checks the function works as intended.
 
-[ ] Wire up the function to the front end and enable AI mode!
+* Wire up the function to the front end and enable AI mode!
 
-[ ] Create a test that checks switching between AI and PVP works.
+* Create a test that checks switching between AI and PVP works.
 
 ## Getting started
 
