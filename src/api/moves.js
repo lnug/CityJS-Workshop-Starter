@@ -9,7 +9,7 @@ export async function addMove({
 }
 
 export async function getAIMove(board) {
-  return post('/.netlify/functions/test', board);
+  return post('/.netlify/functions/robot', board);
 }
 
 export default { 
