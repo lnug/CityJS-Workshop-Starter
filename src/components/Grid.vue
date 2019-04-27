@@ -127,7 +127,8 @@ export default {
                     this.$emit("turnSwitch");
                     moves.getAIMove(this.board)
                         .then(response => {
-                            const position = response.data.index
+                            console.log(response)
+                            const position = response.data
                             this.board = this.board.map((el, index) => index === position ? this.turn : el)
                             if(this.win()) {
                                 return
