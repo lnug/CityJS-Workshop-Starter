@@ -1,6 +1,6 @@
 require('dotenv').config();
 import connectToDatabase from './db/connect';
-import Move from './models/Move';
+import Move from './models/move';
 
 exports.handler = async function(event, context) {
 
