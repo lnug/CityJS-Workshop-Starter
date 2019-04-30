@@ -210,11 +210,56 @@ fs.writeFileSync('trained-net.js', `export default ${ net.toFunction().toString(
 
 ### Step 4 - Using the neural net
 
-Using your trained neural net is super simple.
+Using the trained neural net build the neural net endpoint.
+
 Import it `import trainedNet from './neuralNet/trained-net'`
 and then call it `const result = trainedNet(board)`. This will return a value of the shape of the outputs you put into it. So we can now turn our endpoint that gave us a fake 'next move' into a more useful one...
 
 
 ### Step 5 - Wiring the frontend up to the endpoint
 
+Wiring up the application takes 2 things. You might have noticed that the mode switch button does not actually do anythng. 
+
+To implement this we need to done some Vue.js if you havent done this before the steps here should guide you through it. 
+
+First we need to make the app toggle between 2 player mode and AI mode. This doesnt work at the moment because there are a few things missing from one of the vue components. 
+
+Adding this functionality will introduce us to 2 concepts in vue.
+* Emmitting Events
+* Passing data to components
+
+```javascript
+// src/components/SplitButton.js
+<template>
+    <div :class="$style.wrap" @click=handleClick>
+        <div...
+```
+
+The @click handler was missing so the method to change the mode was never being called. It binds the handleClick method to the @click event emitted from the element.
+
+Still the button does not change to active when we click on it. We need to bind the :mode prop passed to the component. 
+
+line 13 -> `[$style.inactive]: mode === 'ai'`
+
+Like other SPA frameworks vue passes data up and down the component tree. So we need to add the code that gets the `this.$emit('gameMode', this.gameMode)` from the SplitButton component make it call a method in the App.vue component.
+
+```javascript
+// src/App.vue line 45
+<SplitButton :mode="mode" @gameMode="modeSwitch"/>
+
+// line 90
+        },
+        modeSwitch() {
+            this.resetGame()
+            this.mode = this.mode === "2Player" ? "ai" : "2Player";
+            if(this.mode === 'ai') {
+                this.turn = 1
+            }
+        },
+        resetGame() {
+```
+
+@gameMode="modeSwitch" binds the event emitted from the component to the modeSwitch method in the App.vue component.
+
+:mode="mode" passes the mode data into the SplitButton component.
 
