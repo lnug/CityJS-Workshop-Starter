@@ -3,7 +3,7 @@
 This is what you'll be building:
 
 <p align="center">
-  <img src="@attachment/tictacss.png" width="400">
+  <img src="tic-tac-toe.png" width="200">
 </p>
 
 Hello, welcome! This is the "Build your own Serverless tic tac toe AI using Node.js and (a little bit of) TensorFlow.js" Workshop. I hope you are in the right place! 
