@@ -123,13 +123,14 @@ module.exports = {
 }
 ```
 
-If at any point things stop working and you dont know why, rerun the yarn serve command. If you need help just ask Hew or Thomas and hopefully we can figure it out.
+If at any point things stop working and you dont know why, rerun the yarn serve command. If you need help just ask us and hopefully we will do our best to help fix it!
 
 ### Step 1 - Adding an endpoint
 
-Endpoints are built from the `src_functions` directory. Make a new file in `src_functions` with `touch test.js`. Netlify will process this into an endpoint called `/test` and calling the endpoint will trigger the function in `test.js/handler`.
+Endpoints are built from the `src_functions` directory. Make a new file in `src_functions` with `touch test.js`. Netlify will process this into an endpoint called `/test` and calling the endpoint will trigger the function.
 So
-```
+```javascript
+// src_functions/test.js
 exports.handler = function(event, context, callback) {
     console.log('hello world')
 }
@@ -138,7 +139,8 @@ Will log 'hello world' to the console every time the endpoint is hit. It'll also
 
 Instead we need to provide a proper callback and return a nice response. The function below will log out the string and return a 200 with the text as well.
 
-```
+```javascript
+// src_function/test.js
 exports.handler = function(event, context, callback) {
     console.log('hello world')
     callback(null, {
@@ -149,8 +151,16 @@ exports.handler = function(event, context, callback) {
 ```
 Want to take input from a post request and do stuff in the function? Easy
 
-```
+```javascript
+// src_function/test.js
 exports.handler = function(event, context, callback) {
+
+    // If you are building something serious you should probably 
+    // validate that request type :D
+    if (event.httpMethod !== "POST") {
+      return { statusCode: 405, body: "Method Not Allowed" };
+    }
+
     const string = event.body
     callback(null, {
     statusCode: 200,
