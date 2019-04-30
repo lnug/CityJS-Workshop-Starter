@@ -252,9 +252,6 @@ Like other SPA frameworks vue passes data up and down the component tree. So we 
         modeSwitch() {
             this.resetGame()
             this.mode = this.mode === "2Player" ? "ai" : "2Player";
-            if(this.mode === 'ai') {
-                this.turn = 1
-            }
         },
         resetGame() {
 ```
@@ -263,3 +260,46 @@ Like other SPA frameworks vue passes data up and down the component tree. So we 
 
 :mode="mode" passes the mode data into the SplitButton component.
 
+The rest of the AI mode implementation goes in src/components/Grid.vue
+
+<details><summary>If you need a spoiler check here</summary>
+<p>
+
+```javascript
+handleClick: function(position) {
+            if (this.locked) {
+                return;
+            }
+            if (!this.board[position]) {
+                this.board = this.board.map((el, index) => index === position ? this.turn : el);
+
+                if (this.mode === 'ai') {
+                    this.$emit("toggleLock");
+                    if(this.win()) {
+                        return
+                    }
+                    this.$emit("turnSwitch");
+                    moves.getAIMove(this.board)
+                        .then(response => {
+
+                            const position = response.data.index
+
+                            this.board = this.board.map((el, index) => index === position ? this.turn : el)
+                            
+                            if(this.win()) {
+                                return
+                            }
+                            this.$emit("turnSwitch");
+                            this.$emit("toggleLock");
+                        })
+                    return
+                }
+                if(this.win()) {
+                    return
+                }
+                this.$emit("turnSwitch");
+            }
+        },
+```
+<p>
+</details>
