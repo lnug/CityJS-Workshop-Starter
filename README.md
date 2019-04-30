@@ -59,8 +59,11 @@ The following steps will get you up and running.
 2. Go to [Netlify](https://www.netlify.com/) and sign up.
 3. Click New Site from Git.
 4. Pick the CityJS-Workshop repository and Click Deploy.
-5. clone a local copy of the repository
-6. Run the application with `yarn run serve`
+
+Also
+
+1. Clone a local copy of the repository
+2. Run the application with `yarn serve`
 
 #### Netlify
 Netlify is a super easy platform for building, deploying, and serving sweet modern web apps. It'll host a single page app statically and serve up the backend as serverless functions - super scalable, super cheap and super great.
@@ -74,16 +77,53 @@ ID = "Your_Site_ID"
   base = ""
   publish = "dist"
   functions = "functions/"
-  command = "npm run build"
+  command = "yarn build"
 ```
 The base directory is the starting point where netlify looks for a file that shows how your project is configured. i.e. a package.json. It will also install any dependencies for you. All files in the publish directory get deployed to netlifys CDN.
 
 All js files in the funcion directory get deployed as an aws lamda accessable on `/.netlify/<name_of_folder>/<name_of_file>`
 
+Netlify also lets us have a build step. This helps keep the repo free of any bundled and minified code and also allows us to run any preprocing steps on the source code before it gets deployed.
+
+The build command `yarn build` runs this command
+
+```
+netlify-lambda build src_functions && vue-cli-service build
+```
+
+The netlify-lambda and vue cli hide the nuts and bolts from us but behind the scenes they are using webpack and babel + lots of plugins  :sunrise_over_mountains: to make our code run better once its deployed
+
+* netlify-lambda - This takes the contents of src_functions. Compiles, and Minifies it. Then puts the output in the functions directory specified in the netlify.toml
+* vue-cli-service - This builds your vue templates into browser parsable html, css and javascript. Then puts it into the dist directory.
 
 ## Building the app
 
 To start with the app works as a 2 player Tic Tac Toe game, all the functionality is in the frontend.
+
+To start the application run `yarn serve`. This runs both the frontend and backend in development mode. 
+
+Netlify deploys the functions to `<your_site>/.netlify/functions/<function_name_here>` but in development they run on `http://localhost:9000/<function_name_here>`
+
+So that the development experience is seemless the vue development serve proxies the requests to that location using this config:
+
+```javascript
+// vue.config.js
+module.exports = {
+  devServer: {
+    proxy: {
+      '^/.netlify/functions': {
+        target: 'http://localhost:9000',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/.netlify/functions': '', 
+        },
+      }
+    }
+  }
+}
+```
+
+If at any point things stop working and you dont know why, rerun the yarn serve command. If you need help just ask Hew or Thomas and hopefully we can figure it out.
 
 ### Step 1 - Adding an endpoint
 
@@ -166,4 +206,5 @@ and then call it `const result = trainedNet(board)`. This will return a value of
 
 
 ### Step 5 - Wiring the frontend up to the endpoint
+
 
