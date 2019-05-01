@@ -52,7 +52,7 @@ The following steps will get you up and running.
 
  - You'll need to have [node.js](https://nodejs.org/en/) installed
  - [Git](https://git-scm.com/) installed
- - [Yarn](https://yarnpkg.com/en/)
+ - [Yarn](https://yarnpkg.com/en/) installed
 
  
 1. Fork your own copy of the lnug/CityJS-Workshop-Starter to your account.
