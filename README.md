@@ -10,9 +10,9 @@ Hello, welcome! This is the "Build your own Serverless tic tac toe AI using Node
 
 First off let's introduce ourselves:
 
-Hew - Javascript Pirate...
+Hew - Software Engineer at Applied 
 
-Thomas - Javascript Ninja...
+Thomas - Software Engineer at BAE Systems
 
 Over the next 2.5 hours, we will help you learn about serverless functions, good use cases of them, and bad ones! We will also show you how easy it is to build, test, and deploy them.
 
