@@ -241,7 +241,7 @@ Still the button does not change to active when we click on it. We need to bind 
 
 line 13 -> `[$style.inactive]: mode === 'ai'`
 
-Like other SPA frameworks vue passes data up and down the component tree. So we need to add the code that gets the `this.$emit('gameMode', this.gameMode)` from the SplitButton component make it call a method in the App.vue component.
+Like other SPA frameworks vue passes data up and down the component tree. So we need to add `this.$emit('gameMode'` to the SplitButton component and make it call a method in the App.vue component.
 
 ```javascript
 // src/App.vue line 45
