@@ -73,6 +73,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faTimes, faCircle } from "@fortawesome/free-solid-svg-icons";
 import Square from "./Square.vue";
+import { moves } from '../api';
 
 const winContitions = [
     [0,1,2],

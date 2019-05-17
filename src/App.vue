@@ -91,11 +91,12 @@ export default {
         modeSwitch() {
             this.resetGame()
             this.mode = this.mode === "2Player" ? "ai" : "2Player";
+         
         },
         resetGame() {
             this.game = uuid();
             this.locked = false;
-            this.$refs.grid.handleReset();
+            // this.$refs.grid.handleReset();
         },
         handleLockToggle() {
             this.locked = !this.locked;

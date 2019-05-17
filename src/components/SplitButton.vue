@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.wrap">
+    <div :class="$style.wrap" @click="handleClick">
         <div
             :class="{
                 [$style.left]: true,
@@ -40,7 +40,10 @@ export default {
         }
     },
     methods: {
-       
+        handleClick: function() {
+            this.$emit('gameMode');
+            
+        }       
     }
 };
 </script>
