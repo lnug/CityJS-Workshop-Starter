@@ -10,6 +10,7 @@
         <div
             :class="{
                 [$style.right]: true,
+                [$style.inactive]: mode === 'ai'
             }">
             <FontAwesomeIcon :icon="computerIcon" :class="$style.faTimes" /> vs AI
         </div>
